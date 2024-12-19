@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гадалка 🔮</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7e9f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #6a0dad;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        main {
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card h2 {
+            color: #6a0dad;
+        }
+        button {
+            background-color: #6a0dad;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #540c99;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #6a0dad;
+            color: #fff;
+        }
+        input, textarea {
+            width: calc(100% - 40px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        li {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Гадалка 🔮</h1>
+        <p>Узнайте свое будущее с помощью гадания</p>
+    </header>
+
+    <main>
+        <div class="card">
+            <h2>Закажите гадание</h2>
+            <form id="fortuneForm">
+                <label for="name">Ваше имя:</label><br>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required><br>
+                
+                <label for="phone">Ваш номер телефона:</label><br>
+                <input type="tel" id="phone" name="phone" placeholder="Введите номер телефона" required><br>
+                
+                <label for="question">Ваш вопрос:</label><br>
+                <textarea id="question" name="question" rows="4" placeholder="Введите ваш вопрос..." required></textarea><br>
+
+                <button type="submit">Отправить запрос</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Услуги гадалки</h2>
+            <ul>
+                <li>1. Гадание на картах Таро</li>
+                <li>2. Предсказание будущего по ладони</li>
+                <li>3. Анализ совместимости партнёров</li>
+                <li>4. Гадание на карьеру и успех</li>
+                <li>5. Расклад на любовь и отношения</li>
+                <li>6. Диагностика энергетики</li>
+                <li>7. Гадание на рунах</li>
+                <li>8. Привлечение удачи в жизнь</li>
+                <li>9. Расклад на будущее на год</li>
+                <li>10. Поиск ответов на важные вопросы</li>
+                <li>11. Обряд очищения от негатива</li>
+                <li>12. Толкование снов</li>
+                <li>13. Астрологическая карта судьбы</li>
+                <li>14. Расклад на здоровье</li>
+                <li>15. Прогноз финансового успеха</li>
+                <li>16. Диагностика порчи или сглаза</li>
+                <li>17. Ритуал на привлечение любви</li>
+                <li>18. Гадание на семейное счастье</li>
+                <li>19. Определение скрытых талантов</li>
+                <li>20. Прогноз на ближайший месяц</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Гадалка 🔮 Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.getElementById('fortuneForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Получаем данные формы
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const question = document.getElementById('question').value;
+
+            // Данные для отправки
+            const message = `✨ Новый запрос гадания ✨\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n❓ Вопрос: ${question}`;
+            const botToken = '8095432690:AAEGgg-wNVZHmSg7ZC0e4Af99gYrJ4O0ODA';
+            const chatId = '140929728';
+
+            // Отправляем сообщение через Telegram Bot API
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Ваш запрос успешно отправлен!');
+                    document.getElementById('fortuneForm').reset();
+                } else {
+                    alert('Ошибка при отправке. Пожалуйста, попробуйте позже.');
+                }
+            })
+            .catch(error => {
+                alert('Ошибка при отправке. Проверьте соединение с интернетом.');
+                console.error('Ошибка:', error);
+            });
+        });
+    </script>
+</body>
+</html>
